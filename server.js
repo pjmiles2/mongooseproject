@@ -13,7 +13,6 @@ var app = express();
  
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
 
@@ -38,10 +37,7 @@ var mongoURI = "mongodb://localhost/jalopz110";
     console.log("Mongoose connection successful.");
   });
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
 mongoose.Promise = Promise;
-// mongoose.connect(MONGODB_URI);
 
 //ROUTES
 
@@ -71,6 +67,7 @@ app.get("/scrape", function(req, res) {
        
         .children("a")
         .attr("href");
+
       result.img = $(this)
         .children(".image-wrapper lazy-image")
         .children(".img--16x9")
@@ -79,18 +76,14 @@ app.get("/scrape", function(req, res) {
         .children("img")
         .attr("src");
 
-       // Create a new Article using the `result` object built from scraping
           db.Article.create(result)
             .then(function(dbArticle) {
-              // View the added result in the console
-              //   console.log(dbArticle);
+      
             })
             .catch(function(err) {
-              // If an error occurred, send it to the client
               return res.json(err);
             });
-    //     }
-    //   }
+ 
     });
 
     // If we were able to successfully scrape and save an Article, send a message to the client
