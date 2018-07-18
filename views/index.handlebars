@@ -1,0 +1,27 @@
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <ul style="font-size:large;">
+                {{#each articles}}
+                <div id="news">
+                    <h1>{{this.title}}</h1>
+                    <br>
+                    <img id="img" src={{this.img}}>
+                    <br>
+                    <h5>
+                    <a href={{this.link}}>Click Here for link</a>
+                    </h5>
+                    <br> 
+                    <button type="button" class="btn btn-primary commentId" data-toggle="modal" data-target="#exampleModal" data-id={{this.id}}>
+                        Comments
+                    </button>
+                </div>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-4">
+            <div class="comments"></div>
+    </div>
+</div>
